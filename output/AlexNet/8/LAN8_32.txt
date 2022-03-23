@@ -1,0 +1,171 @@
+Loading data done.....
+Rows, Common_dim, Columns: 64x147x100352
+----------------------------------------------
+Communication, CNN0, P0: 6.42253MB (sent) 6.42253MB (recv)
+Rounds, CNN0, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	0 completed...
+Rows, Common_dim, Columns: 64x1600x100352
+----------------------------------------------
+Communication, CNN1, P0: 6.42253MB (sent) 6.42253MB (recv)
+Rounds, CNN1, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	1 completed...
+----------------------------------------------
+Communication, ReLU2, P0: 70.6478MB (sent) 70.6478MB (recv)
+Rounds, ReLU2, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	2 completed...
+BMAXPOOL SIZE: 4
+----------------------------------------------
+Communication, maxpool3, P0: 17.662MB (sent) 17.662MB (recv)
+Rounds, maxpool3, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	3 completed...
+Rows, Common_dim, Columns: 128x1600x25088
+----------------------------------------------
+Communication, CNN4, P0: 3.21126MB (sent) 3.21126MB (recv)
+Rounds, CNN4, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	4 completed...
+----------------------------------------------
+Communication, ReLU5, P0: 35.3239MB (sent) 35.3239MB (recv)
+Rounds, ReLU5, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	5 completed...
+BMAXPOOL SIZE: 4
+----------------------------------------------
+Communication, maxpool6, P0: 8.83098MB (sent) 8.83098MB (recv)
+Rounds, maxpool6, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	6 completed...
+Rows, Common_dim, Columns: 256x1152x6272
+----------------------------------------------
+Communication, CNN7, P0: 1.60563MB (sent) 1.60563MB (recv)
+Rounds, CNN7, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	7 completed...
+Rows, Common_dim, Columns: 256x2304x6272
+----------------------------------------------
+Communication, CNN8, P0: 1.60563MB (sent) 1.60563MB (recv)
+Rounds, CNN8, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	8 completed...
+----------------------------------------------
+Communication, ReLU9, P0: 17.662MB (sent) 17.662MB (recv)
+Rounds, ReLU9, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	9 completed...
+BMAXPOOL SIZE: 4
+----------------------------------------------
+Communication, maxpool10, P0: 4.41549MB (sent) 4.41549MB (recv)
+Rounds, maxpool10, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	10 completed...
+Rows, Common_dim, Columns: 32x12544x1024
+----------------------------------------------
+Communication, FC11, P0: 0.032768MB (sent) 0.032768MB (recv)
+Rounds, FC11, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	11 completed...
+----------------------------------------------
+Communication, ReLU12, P0: 0.360448MB (sent) 0.360448MB (recv)
+Rounds, ReLU12, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	12 completed...
+Rows, Common_dim, Columns: 32x1024x1024
+----------------------------------------------
+Communication, FC13, P0: 0.032768MB (sent) 0.032768MB (recv)
+Rounds, FC13, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	13 completed...
+----------------------------------------------
+Communication, ReLU14, P0: 0.360448MB (sent) 0.360448MB (recv)
+Rounds, ReLU14, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	14 completed...
+Rows, Common_dim, Columns: 32x1024x200
+----------------------------------------------
+Communication, FC15, P0: 0.0064MB (sent) 0.0064MB (recv)
+Rounds, FC15, P0: 1(sends) 1(recvs)
+----------------------------------------------
+Forward 	15 completed...
+----------------------------------------------
+Communication, ReLU16, P0: 0.0704MB (sent) 0.0704MB (recv)
+Rounds, ReLU16, P0: 7(sends) 7(recvs)
+----------------------------------------------
+Forward 	16 completed...
+MPC Output over uint32_t:
+
+----------------------------------------------
+Run details: 3PC (P0), 1 iterations, batch size 32
+Running Semi-honest AlexNet test on ImageNet dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  56 x 56 x 3
+			  7 x 7  	(Filter Size)
+			  1 , 3 	(Stride, padding)
+			  32		(Batch Size)
+			  56 x 56 x 64 	(Output)
+----------------------------------------------
+(2) CNN Layer		  56 x 56 x 64
+			  5 x 5  	(Filter Size)
+			  1 , 2 	(Stride, padding)
+			  32		(Batch Size)
+			  56 x 56 x 64 	(Output)
+----------------------------------------------
+(3) ReLU Layer		  200704 x 32
+----------------------------------------------
+(4) Maxpool Layer	  56 x 56 x 64
+			  2  		(Pooling Size)
+			  2 		(Stride)
+			  32		(Batch Size)
+----------------------------------------------
+(5) CNN Layer		  28 x 28 x 64
+			  5 x 5  	(Filter Size)
+			  1 , 2 	(Stride, padding)
+			  32		(Batch Size)
+			  28 x 28 x 128 	(Output)
+----------------------------------------------
+(6) ReLU Layer		  100352 x 32
+----------------------------------------------
+(7) Maxpool Layer	  28 x 28 x 128
+			  2  		(Pooling Size)
+			  2 		(Stride)
+			  32		(Batch Size)
+----------------------------------------------
+(8) CNN Layer		  14 x 14 x 128
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  32		(Batch Size)
+			  14 x 14 x 256 	(Output)
+----------------------------------------------
+(9) CNN Layer		  14 x 14 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  32		(Batch Size)
+			  14 x 14 x 256 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  50176 x 32
+----------------------------------------------
+(11) Maxpool Layer	  14 x 14 x 256
+			  2  		(Pooling Size)
+			  2 		(Stride)
+			  32		(Batch Size)
+----------------------------------------------
+(12) FC Layer		  12544 x 1024
+			  32		 (Batch Size)
+----------------------------------------------
+(13) ReLU Layer		  1024 x 32
+----------------------------------------------
+(14) FC Layer		  1024 x 1024
+			  32		 (Batch Size)
+----------------------------------------------
+(15) ReLU Layer		  1024 x 32
+----------------------------------------------
+(16) FC Layer		  1024 x 200
+			  32		 (Batch Size)
+----------------------------------------------
+(17) ReLU Layer		  200 x 32
+----------------------------------------------
