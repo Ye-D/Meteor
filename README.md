@@ -1,6 +1,6 @@
 # Meteor
 
-A maliciously secure framework for efficient 3-party protocols tailored for neural networks. This work builds on [Falcon](https://snwagh.github.io).
+A privacy-preserving framework for efficient 3-party protocols tailored for neural networks. This work builds on [Falcon](https://snwagh.github.io).
 
 
 ### Table of Contents
