@@ -428,7 +428,8 @@ void print_vector(RSSVectorSmallType &var, string type, string pre_text, int pri
 */
 // meteor matrxi mult, without eigen.
 void matrixMultMeteor(const MEVectorType &a, const MEVectorType &b, RSSVectorMyType &temp3, size_t rows, size_t common_dim, size_t columns, size_t transpose_a, size_t transpose_b){
-	
+
+#if (!USING_EIGEN)
 	MEVectorType tmp_a(rows*common_dim), tmp_b(common_dim*columns);
 
 	for (size_t i=0; i < rows; i++){
@@ -477,8 +478,62 @@ void matrixMultMeteor(const MEVectorType &a, const MEVectorType &b, RSSVectorMyT
 
 		}
 	}
+#endif
 
+#if (USING_EIGEN)
 
+	eigenMatrix eigen_a(rows, common_dim), eigen_b(common_dim, columns), eigen_c(rows, columns);
+	
+	for (size_t i = 0; i < rows; ++i)
+	{
+		for (size_t j = 0; j < common_dim; ++j)
+		{
+			if (transpose_a)
+			{
+				eigen_a.m_share[0](i, j) = a[j*rows + i].first;
+				eigen_a.m_share[1](i, j) = a[j*rows + i].second.first;
+				eigen_a.m_share[2](i, j) = a[j*rows + i].second.second;
+
+			}
+			else
+			{
+				eigen_a.m_share[0](i, j) = a[i*common_dim + j].first;
+				eigen_a.m_share[1](i, j) = a[i*common_dim + j].second.first;
+				eigen_a.m_share[2](i, j) = a[i*common_dim + j].second.second;
+
+			}
+		}
+	}
+
+	for (size_t i = 0; i < common_dim; ++i)
+	{
+		for (size_t j = 0; j < columns; ++j)
+		{
+			if (transpose_b)
+			{
+				eigen_b.m_share[0](i, j) = b[j*common_dim + i].first;	
+				eigen_b.m_share[1](i, j) = b[j*common_dim + i].second.first;
+				eigen_b.m_share[2](i, j) = b[j*common_dim + i].second.second;	
+
+			}
+			else
+			{
+				eigen_b.m_share[0](i, j) = b[i*columns + j].first;	
+				eigen_b.m_share[1](i, j) = b[i*columns + j].second.first;	
+				eigen_b.m_share[2](i, j) = b[i*columns + j].second.second;				
+			}
+		}
+	}
+	
+	eigen_c = eigen_a * eigen_b;
+
+	for (size_t i = 0; i < rows; ++i){
+		for (size_t j = 0; j < columns; ++j){
+				temp3[i*columns + j].first = eigen_c.m_share[1](i,j);
+				temp3[i*columns + j].second = eigen_c.m_share[2](i,j);
+		}
+	}
+#endif
 
 }
 
