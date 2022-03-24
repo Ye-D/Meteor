@@ -35,6 +35,16 @@ void runTest(string str, string whichTest, string &network)
 			network = "Test Meteor Maxpool";
 			testMeteorMaxpool(24, 24, 20, 2, 2, MINI_BATCH_SIZE, NUM_ITERATIONS);
 		}
+		else if (whichTest.compare("Conv") == 0)
+		{
+			network = "Test Meteor Conv";
+			testMeteorConvolution(28, 28, 1, 20, 3, 1, 0, MINI_BATCH_SIZE, NUM_ITERATIONS);
+		}
+		else if (whichTest.compare("BN") == 0)
+		{
+			network = "Test Meteor BN";
+			test_MeteorBatchNorm(MINI_BATCH_SIZE, 784, NUM_ITERATIONS);
+		}
 		else
 			assert(false && "Unknown test mode selected");
 	}

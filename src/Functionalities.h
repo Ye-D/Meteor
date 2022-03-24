@@ -51,5 +51,7 @@ void testMeteorPC(size_t size, size_t iter);
 void testMeteorRELUPrime(size_t size, size_t iter);
 void testMeteorRelu(size_t size, size_t iter);
 void testMeteorMaxpool(size_t ih, size_t iw, size_t Din, size_t f, size_t S, size_t B, size_t iter);
+void testMeteorConvolution(size_t iw, size_t ih, size_t Din, size_t Dout, size_t f, size_t S, size_t P, size_t B, size_t iter);
+void test_MeteorBatchNorm(size_t numBatches, size_t inputSize, size_t iter);
 
 

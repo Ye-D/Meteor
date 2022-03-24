@@ -735,3 +735,81 @@ void testMeteorMaxpool(size_t ih, size_t iw, size_t Din, size_t f, size_t S, siz
 	}
 }
 
+void testMeteorConvolution(size_t iw, size_t ih, size_t Din, size_t Dout, size_t f, size_t S, size_t P, size_t B, size_t iter)
+{
+	size_t ow 		= (((iw-f+2*P)/S)+1);
+	size_t oh		= (((ih-f+2*P)/S)+1);
+	size_t tempSize = ow*oh;
+
+	MEVectorType a(iw*ih*Din*B, make_pair(0, make_pair(0,0)));
+	MEVectorType b(f*f*Din*Dout, make_pair(0, make_pair(0,0)));
+	MEVectorType ans(ow*oh*Dout*B, make_pair(0, make_pair(0,0)));
+	MEVectorType c(Dout, make_pair(0, make_pair(0,0)));
+
+	for (int runs = 0; runs < iter; ++runs)
+	{
+	// 	//Reshape activations
+	 	MEVectorType temp1((iw+2*P)*(ih+2*P)*Din*B, make_pair(0, make_pair(0,0)));
+	 	zeroPad(a, temp1, iw, ih, P, Din, B);
+
+	 	//Reshape for convolution
+	 	MEVectorType temp2((f*f*Din) * (ow * oh * B));
+	 	//convToMult(temp1, temp2, (iw+2*P), (ih+2*P), f, Din, S, B);
+		{
+		size_t loc_input, loc_output;
+		for (size_t i = 0; i < B; ++i)
+			for (size_t j = 0; j < oh; j++)
+				for (size_t k = 0; k < ow; k++)
+				{
+					loc_output = (i*ow*oh + j*ow + k);
+					for (size_t l = 0; l < Din; ++l) 
+					{
+						loc_input = i*(iw+2*P)*(ih+2*P)*Din + l*(iw+2*P)*(ih+2*P) + j*S*(iw+2*P) + k*S;
+						for (size_t a = 0; a < f; ++a)			//filter height
+							for (size_t b = 0; b < f; ++b){		//filter width
+								temp2[(l*f*f + a*f + b)*ow*oh*B + loc_output].first = temp1[loc_input + a*(iw+2*P) + b].first;
+								temp2[(l*f*f + a*f + b)*ow*oh*B + loc_output].second = temp1[loc_input + a*(iw+2*P) + b].second;
+							}
+					}
+				}
+		}
+		MEVectorType temp3(Dout * (ow*oh*B));
+		Meteor_funcMatMul(b, temp2, temp3, Dout, (f*f*Din), (ow*oh*B), 0, 1, FLOAT_PRECISION);
+
+
+	// 	//Add biases and meta-transpose
+		for (size_t i = 0; i < B; ++i)
+	 		for (size_t j = 0; j < Dout; ++j) 
+	 			for (size_t k = 0; k < tempSize; ++k){
+	 				ans[i*Dout*tempSize + j*tempSize + k].first = temp3[j*B*tempSize + i*tempSize + k].first + c[j].first;	
+	 				ans[i*Dout*tempSize + j*tempSize + k].second = temp3[j*B*tempSize + i*tempSize + k].second + c[j].second;	
+				 }	
+	 }
+}
+
+void test_MeteorBatchNorm(size_t numBatches, size_t inputSize, size_t iter)
+{
+	size_t B = numBatches;
+	size_t m = inputSize;
+
+	MEVectorType gamma(numBatches, make_pair(0, make_pair(0,0))), g_repeat(B*m), input(B*m, make_pair(0, make_pair(0,0))), activations(B*m, make_pair(0, make_pair(0,0))), beta(B, make_pair(0, make_pair(0,0)));
+
+	for(int runs = 0; runs < iter; runs++){	
+		for (int i = 0; i < B; ++i){
+			for (int j = 0; j < m; ++j){
+				g_repeat[i*m+j] = gamma[i];
+			}
+		}
+
+		Meteor_funcDotProduct(g_repeat, input, activations, B*m, true, FLOAT_PRECISION);
+
+		for (int i = 0; i < B; ++i){
+			for (int j = 0; j < m; ++j){
+				activations[i*m+j].first = activations[i*m+j].first + beta[i].first;
+				activations[i*m+j].second = activations[i*m+j].second + beta[i].second;
+			}
+		}
+	}
+
+}
+
