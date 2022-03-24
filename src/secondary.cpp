@@ -1014,11 +1014,11 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 		NUM_LAYERS = 10;
 		WITH_NORMALIZATION = true;
 		CNNConfig* l0 = new CNNConfig(28,28,1,20,5,1,0,MINI_BATCH_SIZE);
-		ReLUConfig* l1 = new ReLUConfig(24*24*20, MINI_BATCH_SIZE);
-		MaxpoolConfig* l2 = new MaxpoolConfig(24,24,20,2,2,MINI_BATCH_SIZE);
+		MaxpoolConfig* l1 = new MaxpoolConfig(24,24,20,2,2,MINI_BATCH_SIZE);
+		ReLUConfig* l2 = new ReLUConfig(12*12*20, MINI_BATCH_SIZE);
 		CNNConfig* l3 = new CNNConfig(12,12,20,50,5,1,0,MINI_BATCH_SIZE);
-		ReLUConfig* l4 = new ReLUConfig(8*8*50, MINI_BATCH_SIZE);
-		MaxpoolConfig* l5 = new MaxpoolConfig(8,8,50,2,2,MINI_BATCH_SIZE);
+		MaxpoolConfig* l4 = new MaxpoolConfig(8,8,50,2,2,MINI_BATCH_SIZE);
+		ReLUConfig* l5 = new ReLUConfig(4*4*50, MINI_BATCH_SIZE);
 		FCConfig* l6 = new FCConfig(4*4*50, MINI_BATCH_SIZE, 500);
 		ReLUConfig* l7 = new ReLUConfig(500, MINI_BATCH_SIZE);
 		FCConfig* l8 = new FCConfig(500, MINI_BATCH_SIZE, 10);
@@ -1040,18 +1040,18 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 			assert(false && "No AlexNet on MNIST");
 		else if (dataset.compare("CIFAR10") == 0)
 		{
-			//NUM_LAYERS = 20;
-		    NUM_LAYERS = 18;		//Without BN
+			NUM_LAYERS = 20;
+		    //NUM_LAYERS = 18;		//Without BN
 			WITH_NORMALIZATION = false;
 			CNNConfig* l0 = new CNNConfig(33,33,3,96,11,4,9,MINI_BATCH_SIZE);
 			MaxpoolConfig* l1 = new MaxpoolConfig(11,11,96,3,2,MINI_BATCH_SIZE);
 			ReLUConfig* l2 = new ReLUConfig(5*5*96,MINI_BATCH_SIZE);		
-			//BNConfig * l3 = new BNConfig(5*5*96,MINI_BATCH_SIZE);
+			BNConfig * l3 = new BNConfig(5*5*96,MINI_BATCH_SIZE);
 
 			CNNConfig* l4 = new CNNConfig(5,5,96,256,5,1,1,MINI_BATCH_SIZE);
 			MaxpoolConfig* l5 = new MaxpoolConfig(3,3,256,3,2,MINI_BATCH_SIZE);
 			ReLUConfig* l6 = new ReLUConfig(1*1*256,MINI_BATCH_SIZE);		
-			//BNConfig * l7 = new BNConfig(1*1*256,MINI_BATCH_SIZE);
+			BNConfig * l7 = new BNConfig(1*1*256,MINI_BATCH_SIZE);
 
 			CNNConfig* l8 = new CNNConfig(1,1,256,384,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l9 = new ReLUConfig(1*1*384,MINI_BATCH_SIZE);
@@ -1069,11 +1069,11 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 			config->addLayer(l0);
 			config->addLayer(l1);
 			config->addLayer(l2);
-			//config->addLayer(l3);
+			config->addLayer(l3);
 			config->addLayer(l4);
 			config->addLayer(l5);
 			config->addLayer(l6);
-			//config->addLayer(l7);
+			config->addLayer(l7);
 			config->addLayer(l8);
 			config->addLayer(l9);
 			config->addLayer(l10);
@@ -1089,27 +1089,24 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 		}
 		else if (dataset.compare("ImageNet") == 0)
 		{
-			//NUM_LAYERS = 19;
-		    NUM_LAYERS = 17;		//Without BN
+			NUM_LAYERS = 19;
+			// NUM_LAYERS = 17;		//Without BN
 			WITH_NORMALIZATION = false;
 			CNNConfig* l0 = new CNNConfig(56,56,3,64,7,1,3,MINI_BATCH_SIZE);
 			CNNConfig* l1 = new CNNConfig(56,56,64,64,5,1,2,MINI_BATCH_SIZE);
-			ReLUConfig* l2 = new ReLUConfig(56*56*64,MINI_BATCH_SIZE);		
-			MaxpoolConfig* l3 = new MaxpoolConfig(56,56,64,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l3 = new ReLUConfig(28*28*64,MINI_BATCH_SIZE);		
-			//BNConfig * l4 = new BNConfig(28*28*64,MINI_BATCH_SIZE);
+			MaxpoolConfig* l2 = new MaxpoolConfig(56,56,64,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l3 = new ReLUConfig(28*28*64,MINI_BATCH_SIZE);		
+			BNConfig * l4 = new BNConfig(28*28*64,MINI_BATCH_SIZE);
 
 			CNNConfig* l5 = new CNNConfig(28,28,64,128,5,1,2,MINI_BATCH_SIZE);
-			ReLUConfig* l6 = new ReLUConfig(28*28*128,MINI_BATCH_SIZE);		
-			MaxpoolConfig* l7 = new MaxpoolConfig(28,28,128,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l7 = new ReLUConfig(14*14*128,MINI_BATCH_SIZE);		
-			//BNConfig * l8 = new BNConfig(14*14*128,MINI_BATCH_SIZE);
+			MaxpoolConfig* l6 = new MaxpoolConfig(28,28,128,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l7 = new ReLUConfig(14*14*128,MINI_BATCH_SIZE);		
+			BNConfig * l8 = new BNConfig(14*14*128,MINI_BATCH_SIZE);
 
 			CNNConfig* l9 = new CNNConfig(14,14,128,256,3,1,1,MINI_BATCH_SIZE);
 			CNNConfig* l10 = new CNNConfig(14,14,256,256,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l11 = new ReLUConfig(14*14*256,MINI_BATCH_SIZE);
-			MaxpoolConfig* l12 = new MaxpoolConfig(14,14,256,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l12 = new ReLUConfig(7*7*256,MINI_BATCH_SIZE);
+			MaxpoolConfig* l11 = new MaxpoolConfig(14,14,256,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l12 = new ReLUConfig(7*7*256,MINI_BATCH_SIZE);
 
 			FCConfig* l13 = new FCConfig(7*7*256,MINI_BATCH_SIZE,1024);
 			ReLUConfig* l14 = new ReLUConfig(1024,MINI_BATCH_SIZE);
@@ -1121,11 +1118,11 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 			config->addLayer(l1);
 			config->addLayer(l2);
 			config->addLayer(l3);
-			//config->addLayer(l4);
+			config->addLayer(l4);
 			config->addLayer(l5);
 			config->addLayer(l6);
 			config->addLayer(l7);
-			//config->addLayer(l8);
+			config->addLayer(l8);
 			config->addLayer(l9);
 			config->addLayer(l10);
 			config->addLayer(l11);
@@ -1149,48 +1146,45 @@ void selectNetwork(string network, string dataset, string security, NeuralNetCon
 			CNNConfig* l0 = new CNNConfig(32,32,3,64,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l1 = new ReLUConfig(32*32*64,MINI_BATCH_SIZE);		
 			CNNConfig* l2 = new CNNConfig(32,32,64,64,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l3 = new ReLUConfig(32*32*64, MINI_BATCH_SIZE);
-			MaxpoolConfig* l4 = new MaxpoolConfig(32,32,64,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l4 = new ReLUConfig(16*16*64,MINI_BATCH_SIZE);
+			MaxpoolConfig* l3 = new MaxpoolConfig(32,32,64,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l4 = new ReLUConfig(16*16*64,MINI_BATCH_SIZE);
 
 			CNNConfig* l5 = new CNNConfig(16,16,64,128,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l6 = new ReLUConfig(16*16*128,MINI_BATCH_SIZE);
 			CNNConfig* l7 = new CNNConfig(16,16,128,128,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l8 = new ReLUConfig(16*16*128, MINI_BATCH_SIZE);
-			MaxpoolConfig* l9 = new MaxpoolConfig(16,16,128,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l9 = new ReLUConfig(8*8*128,MINI_BATCH_SIZE);
+			MaxpoolConfig* l8 = new MaxpoolConfig(16,16,128,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l9 = new ReLUConfig(8*8*128,MINI_BATCH_SIZE);
 
 			CNNConfig* l10 = new CNNConfig(8,8,128,256,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l11 = new ReLUConfig(8*8*256,MINI_BATCH_SIZE);
 			CNNConfig* l12 = new CNNConfig(8,8,256,256,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l13 = new ReLUConfig(8*8*256,MINI_BATCH_SIZE);
 			CNNConfig* l14 = new CNNConfig(8,8,256,256,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l15 = new ReLUConfig(8*8*256,MINI_BATCH_SIZE);
-			MaxpoolConfig* l16 = new MaxpoolConfig(8,8,256,2,2,MINI_BATCH_SIZE);
-			//ReLUConfig* l16 = new ReLUConfig(4*4*256,MINI_BATCH_SIZE);
+			MaxpoolConfig* l15 = new MaxpoolConfig(8,8,256,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l16 = new ReLUConfig(4*4*256,MINI_BATCH_SIZE);
 
 			CNNConfig* l17 = new CNNConfig(4,4,256,512,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l18 = new ReLUConfig(4*4*512,MINI_BATCH_SIZE);
 			CNNConfig* l19 = new CNNConfig(4,4,512,512,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l20 = new ReLUConfig(4*4*512,MINI_BATCH_SIZE);
 			CNNConfig* l21 = new CNNConfig(4,4,512,512,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l22 = new ReLUConfig(4*4*512,MINI_BATCH_SIZE);
-			MaxpoolConfig* l23 = new MaxpoolConfig(4,4,512,2,2,MINI_BATCH_SIZE);
+			MaxpoolConfig* l22 = new MaxpoolConfig(4,4,512,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l23 = new ReLUConfig(2*2*512,MINI_BATCH_SIZE);
 
 			CNNConfig* l24 = new CNNConfig(2,2,512,512,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l25 = new ReLUConfig(2*2*512,MINI_BATCH_SIZE);
 			CNNConfig* l26 = new CNNConfig(2,2,512,512,3,1,1,MINI_BATCH_SIZE);
 			ReLUConfig* l27 = new ReLUConfig(2*2*512,MINI_BATCH_SIZE);
 			CNNConfig* l28 = new CNNConfig(2,2,512,512,3,1,1,MINI_BATCH_SIZE);
-			ReLUConfig* l29 = new ReLUConfig(2*2*512,MINI_BATCH_SIZE);
-			MaxpoolConfig* l30 = new MaxpoolConfig(2,2,512,2,2,MINI_BATCH_SIZE);
+			MaxpoolConfig* l29 = new MaxpoolConfig(2,2,512,2,2,MINI_BATCH_SIZE);
+			ReLUConfig* l30 = new ReLUConfig(1*1*512,MINI_BATCH_SIZE);
 
 			FCConfig* l31 = new FCConfig(1*1*512,MINI_BATCH_SIZE,4096);
 			ReLUConfig* l32 = new ReLUConfig(4096,MINI_BATCH_SIZE);
 			FCConfig* l33 = new FCConfig(4096, MINI_BATCH_SIZE, 4096);
 			ReLUConfig* l34 = new ReLUConfig(4096, MINI_BATCH_SIZE);
-			FCConfig* l35 = new FCConfig(4096, MINI_BATCH_SIZE, 10);
-			ReLUConfig* l36 = new ReLUConfig(10, MINI_BATCH_SIZE);
+			FCConfig* l35 = new FCConfig(4096, MINI_BATCH_SIZE, 1000);
+			ReLUConfig* l36 = new ReLUConfig(1000, MINI_BATCH_SIZE);
 			config->addLayer(l0);
 			config->addLayer(l1);
 			config->addLayer(l2);

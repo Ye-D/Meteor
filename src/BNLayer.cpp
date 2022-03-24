@@ -29,9 +29,10 @@ void BNLayer::printLayer()
 void BNLayer::forward(const MEVectorType& inputActivation)
 {
 	log_print("BN.forward");
-/*
+
 	size_t B = conf.numBatches;
 	size_t m = conf.inputSize;
+	/*
 	size_t EPSILON = (myType)(1 << (FLOAT_PRECISION - 8));
 	// TODO: Accept initialization from the paper
 	size_t INITIAL_GUESS = (myType)(1 << (FLOAT_PRECISION));
@@ -78,16 +79,21 @@ void BNLayer::forward(const MEVectorType& inputActivation)
 	funcBatchNorm(temp1, sigma, xhat, m, B);
 
 	//Scaling
-	RSSVectorMyType g_repeat(B*m);
-	for (int i = 0; i < B; ++i)
-		for (int j = 0; j < m; ++j)
-			g_repeat[i*m+j] = gamma[i];
-
-	//funcDotProduct(g_repeat, xhat, activations, B*m, true, FLOAT_PRECISION);
-	for (int i = 0; i < B; ++i)
-		for (int j = 0; j < m; ++j)
-			activations[i*m+j] = activations[i*m+j] + beta[i];
 	*/
+	MEVectorType g_repeat(B*m);
+	for (int i = 0; i < B; ++i){
+		for (int j = 0; j < m; ++j){
+			g_repeat[i*m+j] = gamma[i];
+		}
+	}
+
+	Meteor_funcDotProduct(g_repeat, inputActivation, activations, B*m, true, FLOAT_PRECISION);
+	for (int i = 0; i < B; ++i){
+		for (int j = 0; j < m; ++j){
+			activations[i*m+j].first = activations[i*m+j].first + beta[i].first;
+			activations[i*m+j].second = activations[i*m+j].second + beta[i].second;
+		}
+	}
 	//pause_communication();
 	//end_communication("BN" + to_string(layerNum));
 	//resume_communication();
