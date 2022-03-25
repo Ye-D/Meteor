@@ -57,9 +57,9 @@ Meteor.out: $(OBJ_FILES)
 %.o: %.cpp $(HEADER_FILES)
 	$(CXX) $(FLAGS) -c $< -o $@ $(OBJ_INCLUDES)
 
-#clean: ## Run this to clean all files
-#	rm -rf Meteor.out
-#	rm -rf src/*.o util/*.o
+clean: ## Run this to clean all files
+	rm -rf Meteor.out
+	rm -rf src/*.o util/*.o
 
 ################################# Remote runs ##########################################
 terminal: Meteor.out ## Run this to print the output of (only) Party 0 to terminal
