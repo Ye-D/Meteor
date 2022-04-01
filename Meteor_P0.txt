@@ -1,0 +1,109 @@
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 2 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 3 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 4 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 5 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 6 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 7 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 8 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 9 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0945995 sec
+CPU time for Test Meteor RELU: 0.04946 sec
+----------------------------------------------
+----------------------------------------------
+Total communication: 2.9184MB (sent) and 2.9184MB (recv)
+Total calls: 210 (sends) and 210 (recvs)
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P0: 0.9728MB (sent) 0.9728MB (recv)
+Rounds, Test Meteor RELU, P0: 70(sends) 70(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P0), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------

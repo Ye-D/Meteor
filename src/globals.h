@@ -23,7 +23,7 @@
 #define FUNCTION_TIME true
 #define RANDOM_COMPUTE 256	//Size of buffer for random elements
 #define STRING_BUFFER_SIZE 256
-#define PARALLEL true
+#define PARALLEL false
 #define NO_CORES 8
 
 
@@ -41,12 +41,12 @@
 
 /********************* Neural Network globals *********************/
 //Batch size has to be a power of two
-#define LOG_MINI_BATCH 7
+#define LOG_MINI_BATCH 0
 #define MINI_BATCH_SIZE (1 << LOG_MINI_BATCH)
 #define LOG_LEARNING_RATE 5
 #define LEARNING_RATE (1 << (FLOAT_PRECISION - LOG_LEARNING_RATE))
 #define NO_OF_EPOCHS 1.5
-#define NUM_ITERATIONS 10
+#define NUM_ITERATIONS 1
 // #define NUM_ITERATIONS ((int) (NO_OF_EPOCHS * TRAINING_DATA_SIZE/MINI_BATCH_SIZE))
 
 

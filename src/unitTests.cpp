@@ -13,7 +13,7 @@ void runTest(string str, string whichTest, string &network)
 		
 		if(whichTest.compare("MeteorRELU") == 0){
 			network = "Test Meteor RELU";
-			testMeteorRelu(200, 2);
+			testMeteorRelu(1024, 10);
 		}
 		else if(whichTest.compare("MeteorRELUPrime") == 0){
 			network = "Test Meteor RELUPrime";

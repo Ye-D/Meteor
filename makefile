@@ -81,9 +81,9 @@ valg: Meteor.out ## Run this to execute (only) Party 0 using valgrind. Change FL
 	valgrind --tool=memcheck --leak-check=full --track-origins=yes --dsymutil=yes ./Meteor.out 0 files/IP_$(RUN_TYPE) files/keyA files/keyAB files/keyAC
 
 command: Meteor.out ## Run this to use the run parameters specified in the makefile. 
-	./Meteor.out 2 files/IP_$(RUN_TYPE) files/keyC files/keyAC files/keyBC $(NETWORK) $(DATASET) $(SECURITY) >>LeNet/P2.txt &
-	./Meteor.out 1 files/IP_$(RUN_TYPE) files/keyB files/keyBC files/keyAB $(NETWORK) $(DATASET) $(SECURITY) >>LeNet/P1.txt &
-	./Meteor.out 0 files/IP_$(RUN_TYPE) files/keyA files/keyAB files/keyAC $(NETWORK) $(DATASET) $(SECURITY) >>LeNet/P0.txt
+	./Meteor.out 2 files/IP_$(RUN_TYPE) files/keyC files/keyAC files/keyBC $(NETWORK) $(DATASET) $(SECURITY) >>P2.txt &
+	./Meteor.out 1 files/IP_$(RUN_TYPE) files/keyB files/keyBC files/keyAB $(NETWORK) $(DATASET) $(SECURITY) >>P1.txt &
+	./Meteor.out 0 files/IP_$(RUN_TYPE) files/keyA files/keyAB files/keyAC $(NETWORK) $(DATASET) $(SECURITY) >>Meteor_P0.txt
 	@echo "Execution completed"
 
 

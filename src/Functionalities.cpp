@@ -495,14 +495,36 @@ void Meteor_funcRELU(const MEVectorType &a, MEVectorSmallType &temp, MEVectorTyp
 	log_print("Meteor funcRELU");
 	cout << "WE ARE USING METEOR RELU NOW!" << endl;
 	assert(a.size() == size && "input a is size error");
-	MEVectorSmallType c(size, make_pair(0, make_pair(0,0)));
-	RSSVectorSmallType bXORc(size);
-	MEVectorType m_c(size, make_pair(0, make_pair(0,0)));
-	vector<smallType> reconst_b(size, 0), a_prev(size, 0), a_next(size, 0);
+	//MEVectorSmallType c(size, make_pair(0, make_pair(0,0)));
+	RSSVectorMyType delta_shared(size);
+	vector<myType> delta(size);
+	//MEVectorType m_c(size, make_pair(0, make_pair(0,0)));
+	//vector<smallType> reconst_b(size, 0), a_prev(size, 0), a_next(size, 0);
 	
 	Meteor_funcRELUPrime(a, temp, size);
 	
+	for(int i = 0; i < size; i++)
+	{
+		if(partyNum == PARTY_A){
+			delta_shared[i].first = ( 1 - 2 * int(temp[i].second.first) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.first) + a[i].second.first * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+			delta_shared[i].second = (-2 * int(temp[i].second.second) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.second) + a[i].second.second * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+		}
+		else if(partyNum == PARTY_B){
+			delta_shared[i].first = (-2 * int(temp[i].second.first) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.first) + a[i].second.first * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+			delta_shared[i].second = (-2 * int(temp[i].second.second) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.second) + a[i].second.second * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+		}
+		else if(partyNum == PARTY_C){
+			delta_shared[i].first = (-2 * int(temp[i].second.first) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.first) + a[i].second.first * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+			delta_shared[i].second = (1-2 * int(temp[i].second.second) ) * int(temp[i].first) * a[i].first + a[i].first * int(temp[i].second.second) + a[i].second.second * int(temp[i].first) + (1-2*int(temp[i].first)) * 0 - 0;
+		}
+	}
+	funcReconstruct(delta_shared, delta, size, "delta", false);
 
+	for(int i = 0; i < size; i++){
+		b[i] = make_pair(delta[i], make_pair(0,0));
+	}
+	
+	/*
 	for(int i = 0; i < size; ++i)
 	{
 		bXORc[i] = c[i].second ^ temp[i].second;
@@ -532,6 +554,8 @@ void Meteor_funcRELU(const MEVectorType &a, MEVectorSmallType &temp, MEVectorTyp
 
 	// b = m_c * a
 	Meteor_funcDotProduct(a, m_c, b, size, false, 0);
+	*/
+	
 
 }
 

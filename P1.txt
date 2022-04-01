@@ -1,0 +1,693 @@
+Loading data done.....
+connected success
+----------------------------------------------
+Wall Clock time for Test Meteor BN: 0.0319215 sec
+CPU time for Test Meteor BN: 0.03109 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor BN, P1: 8.02816MB (sent) 8.02816MB (recv)
+Rounds, Test Meteor BN, P1: 10(sends) 10(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 10 iterations, batch size 128
+Running Semi-honest Test Meteor BN on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  128		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  128		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 128
+----------------------------------------------
+(4) BN Layer		  2400 x 128
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  128		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  128		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 128
+----------------------------------------------
+(8) BN Layer		  256 x 128
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  128		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 128
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  128		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 128
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  128		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 128
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  128		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 128
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  128		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 128
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  128		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 128
+----------------------------------------------
+Loading data done.....
+connected success
+----------------------------------------------
+Wall Clock time for Test Meteor BN: 0.00517373 sec
+CPU time for Test Meteor BN: 0.002079 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor BN, P1: 0.06272MB (sent) 0.06272MB (recv)
+Rounds, Test Meteor BN, P1: 10(sends) 10(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 10 iterations, batch size 1
+Running Semi-honest Test Meteor BN on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
+Loading data done.....
+connected success
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+14 milliseconds
+Meteor_funcMaxpool: WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+126
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+11 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+49 milliseconds
+Meteor_funcMaxpool: WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+WE ARE USING METEOR RELU NOW!
+19
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+3 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+44 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+4 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+94 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+1 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+53 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+1 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+1 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+4 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+2 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+1 milliseconds
+Meteor_funcMatMul: WE ARE USING METEOR MATMUL!
+0 milliseconds
+Meteor_funcRELU: WE ARE USING METEOR RELU NOW!
+0 milliseconds
+----------------------------------------------
+Wall Clock time for AlexNet test: 0.440636 sec
+CPU time for AlexNet test: 0.386751 sec
+----------------------------------------------
+----------------------------------------------
+Communication, AlexNet test, P1: 2.58818MB (sent) 2.58818MB (recv)
+Rounds, AlexNet test, P1: 202(sends) 202(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 1 iterations, batch size 1
+Running Semi-honest AlexNet test on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0113714 sec
+CPU time for Test Meteor RELU: 0.002963 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P1: 0.038MB (sent) 0.038MB (recv)
+Rounds, Test Meteor RELU, P1: 14(sends) 14(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0154814 sec
+CPU time for Test Meteor RELU: 0.003057 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P1: 0.038MB (sent) 0.038MB (recv)
+Rounds, Test Meteor RELU, P1: 14(sends) 14(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 2 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 3 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 4 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 5 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 6 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 7 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 8 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 9 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0422026 sec
+CPU time for Test Meteor RELU: 0.01276 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P1: 0.19MB (sent) 0.19MB (recv)
+Rounds, Test Meteor RELU, P1: 70(sends) 70(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 2 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 3 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 4 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 5 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 6 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 7 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 8 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 9 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0936672 sec
+CPU time for Test Meteor RELU: 0.043875 sec
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P1: 0.9728MB (sent) 0.9728MB (recv)
+Rounds, Test Meteor RELU, P1: 70(sends) 70(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P1), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on CIFAR10 dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) CNN Layer		  33 x 33 x 3
+			  11 x 11  	(Filter Size)
+			  4 , 9 	(Stride, padding)
+			  1		(Batch Size)
+			  11 x 11 x 96 	(Output)
+----------------------------------------------
+(2) Maxpool Layer	  11 x 11 x 96
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(3) ReLU Layer		  2400 x 1
+----------------------------------------------
+(4) BN Layer		  2400 x 1
+----------------------------------------------
+(5) CNN Layer		  5 x 5 x 96
+			  5 x 5  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  3 x 3 x 256 	(Output)
+----------------------------------------------
+(6) Maxpool Layer	  3 x 3 x 256
+			  3  		(Pooling Size)
+			  2 		(Stride)
+			  1		(Batch Size)
+----------------------------------------------
+(7) ReLU Layer		  256 x 1
+----------------------------------------------
+(8) BN Layer		  256 x 1
+----------------------------------------------
+(9) CNN Layer		  1 x 1 x 256
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(10) ReLU Layer		  384 x 1
+----------------------------------------------
+(11) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 384 	(Output)
+----------------------------------------------
+(12) ReLU Layer		  384 x 1
+----------------------------------------------
+(13) CNN Layer		  1 x 1 x 384
+			  3 x 3  	(Filter Size)
+			  1 , 1 	(Stride, padding)
+			  1		(Batch Size)
+			  1 x 1 x 256 	(Output)
+----------------------------------------------
+(14) ReLU Layer		  256 x 1
+----------------------------------------------
+(15) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(16) ReLU Layer		  256 x 1
+----------------------------------------------
+(17) FC Layer		  256 x 256
+			  1		 (Batch Size)
+----------------------------------------------
+(18) ReLU Layer		  256 x 1
+----------------------------------------------
+(19) FC Layer		  256 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(20) ReLU Layer		  10 x 1
+----------------------------------------------
