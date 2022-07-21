@@ -227,6 +227,125 @@ void Meteor_funcDotProduct(const MEVectorType &a, const MEVectorType &b, MEVecto
 
 }
 
+void funcReconstruct3out3parallel(const vector<smallType> &a, vector<smallType> &b, size_t size, string str, bool print)
+{
+ 	assert(a.size() == size && "a.size mismatch for reconstruct function");
+
+	vector<smallType> a_next(size), a_prev(size);
+ 	for (int i = 0; i < size; ++i)
+ 	{
+ 		a_prev[i] = 0;
+ 		a_next[i] = 0;
+ 	}
+
+ 	thread *threads = new thread[4];
+
+ 	threads[0] = thread(sendVector<smallType>, ref(a), nextParty(partyNum), size);
+ 	threads[1] = thread(sendVector<smallType>, ref(a), prevParty(partyNum), size);
+ 	threads[2] = thread(receiveVector<smallType>, ref(a_next), nextParty(partyNum), size);
+ 	threads[3] = thread(receiveVector<smallType>, ref(a_prev), prevParty(partyNum), size);
+
+ 	for (int i = 0; i < 4; i++)
+ 		threads[i].join();
+
+ 	delete[] threads;
+
+ 	for (int i = 0; i < size; ++i)
+ 		b[i] = additionModPrime[additionModPrime[a[i]][a_prev[i]]][a_next[i]];
+ }
+
+void funcReconstruct3out3(const vector<smallType> &a, vector<smallType> &b, size_t size, string str, bool print)
+{
+	log_print("Reconst: smallType, smallType");
+	assert(a.size() == size && "a.size mismatch for reconstruct function");
+
+	vector<smallType> temp_A(size,0), temp_B(size, 0);
+
+	if (partyNum == PARTY_A or partyNum == PARTY_B)
+		sendVector<smallType>(a, PARTY_C, size);
+
+	if (partyNum == PARTY_C)
+	{
+		receiveVector<smallType>(temp_A, PARTY_A, size);
+		receiveVector<smallType>(temp_B, PARTY_B, size);
+		addVectors<smallType>(temp_A, a, temp_A, size);
+		addVectors<smallType>(temp_B, temp_A, b, size);
+		sendVector<smallType>(b, PARTY_A, size);
+		sendVector<smallType>(b, PARTY_B, size);
+	}
+
+	if (partyNum == PARTY_A or partyNum == PARTY_B)
+		receiveVector<smallType>(b, PARTY_C, size);
+
+	if (print)
+	{
+		std::cout << str << ": \t\t";
+		for (int i = 0; i < size; ++i)
+			print_linear(b[i], "SIGNED");
+		std::cout << std::endl;
+	}
+}
+
+
+void funcReconstruct3out3parallel(const vector<myType> &a, vector<myType> &b, size_t size, string str, bool print)
+{
+ 	assert(a.size() == size && "a.size mismatch for reconstruct function");
+
+	vector<myType> a_next(size), a_prev(size);
+ 	for (int i = 0; i < size; ++i)
+ 	{
+ 		a_prev[i] = 0;
+ 		a_next[i] = 0;
+ 	}
+
+ 	thread *threads = new thread[4];
+
+ 	threads[0] = thread(sendVector<myType>, ref(a), nextParty(partyNum), size);
+ 	threads[1] = thread(sendVector<myType>, ref(a), prevParty(partyNum), size);
+ 	threads[2] = thread(receiveVector<myType>, ref(a_next), nextParty(partyNum), size);
+ 	threads[3] = thread(receiveVector<myType>, ref(a_prev), prevParty(partyNum), size);
+
+ 	for (int i = 0; i < 4; i++)
+ 		threads[i].join();
+
+ 	delete[] threads;
+
+ 	for (int i = 0; i < size; ++i)
+ 		b[i] = a[i] + a_prev[i] + a_next[i];
+ }
+
+void funcReconstruct3out3(const vector<myType> &a, vector<myType> &b, size_t size, string str, bool print)
+{
+	log_print("Reconst: myType, myType");
+	assert(a.size() == size && "a.size mismatch for reconstruct function");
+
+	vector<myType> temp_A(size,0), temp_B(size, 0);
+
+	if (partyNum == PARTY_A or partyNum == PARTY_B)
+		sendVector<myType>(a, PARTY_C, size);
+
+	if (partyNum == PARTY_C)
+	{
+		receiveVector<myType>(temp_A, PARTY_A, size);
+		receiveVector<myType>(temp_B, PARTY_B, size);
+		addVectors<myType>(temp_A, a, temp_A, size);
+		addVectors<myType>(temp_B, temp_A, b, size);
+		sendVector<myType>(b, PARTY_A, size);
+		sendVector<myType>(b, PARTY_B, size);
+	}
+
+	if (partyNum == PARTY_A or partyNum == PARTY_B)
+		receiveVector<myType>(b, PARTY_C, size);
+
+	if (print)
+	{
+		std::cout << str << ": \t\t";
+		for (int i = 0; i < size; ++i)
+			print_linear(b[i], "SIGNED");
+		std::cout << std::endl;
+	}
+}
+
 
 void Meteor_funcDotProduct(const MEVectorSmallType &a, const MEVectorSmallType &b, MEVectorSmallType &c, size_t size)
 {
@@ -312,15 +431,119 @@ void Meteor_funcDotProductBits(const MEVectorSmallType &a, const MEVectorSmallTy
 	for(int i =0; i < size; i++)
 	{
 		c[i] = make_pair(Delta[i], make_pair(0,0));
-		
 	}
 }
+
+void Thunder_funcNMultGateOnline(const MEVectorType &c_1, MEVectorType &c_2, size_t size)
+{
+	log_print("only support 64 bit!");
+	assert((size % 4) == 0 && "size is not in {64, 16, 4}, error!");
+	size_t rss_size = size / 2, res_size = size / 4;
+	RSSVectorMyType rss_tmp(rss_size, make_pair(0,0));
+	vector<myType> ass_tmp(res_size, 0), Delta(res_size, 0);
+
+	for(size_t i = 0; i < rss_size; i++){
+	   // masked-replicated secret sharing -> mult-> replicated secret sharing;
+		rss_tmp[i].first = c_1[2*i].first * c_1[2*i+1].second.first + c_1[2*i].second.first * c_1[2*i+1].first + 0 - 0;
+		rss_tmp[i].second = c_1[2*i].first * c_1[2*i+1].second.second + c_1[2*i].second.second * c_1[2*i+1].first + 0 - 0;
+
+		if(partyNum == PARTY_A){
+			rss_tmp[i].first += c_1[2*i].first * c_1[2*i+1].first;
+		}
+		if(partyNum == PARTY_C){
+			rss_tmp[i].second += c_1[2*i].first * c_1[2*i+1].first;
+		}
+	}
+
+	for(size_t i = 0; i < res_size; i++){
+		// replicated secret sharing -> mult -> additive secret sharing;
+		ass_tmp[i] = rss_tmp[2*i].first * rss_tmp[2*i+1].first + rss_tmp[2*i].first * rss_tmp[2*i+1].second + rss_tmp[2*i].second * rss_tmp[2*i+1].first;
+		//additionModPrime[additionModPrime[multiplicationModPrime[rss_tmp[2*i].first][rss_tmp[2*i+1].first]][multiplicationModPrime[rss_tmp[2*i].first][rss_tmp[2*i+1].second]]][multiplicationModPrime[rss_tmp[2*i].second][rss_tmp[2*i+1].first]];
+	}
+
+	funcReconstruct3out3parallel(ass_tmp, Delta, res_size, "reveal 3-3 sharing", false);
+
+	for(size_t i =0; i < res_size; i++)
+	{
+		c_2[i] = make_pair(Delta[i], make_pair(0,0));
+		
+	}
+
+}
+
+void Thunder_funcNMultGate(const MEVectorType &c, size_t size, size_t N)
+{
+	size_t sizeLong = size * N;
+	size_t rounds = size_t(log2(N)/2);
+
+	//start_m();
+	start_communication();
+	start_time();
+	// Setup for our improved 4-input mult gates over meteor, start
+	size_t setup_size = N + N / 4 + N / 16;
+	MEVectorType a(setup_size / 2,  make_pair(1, make_pair(0,0))),  b(setup_size / 2,  make_pair(2, make_pair(0,0))), ab(setup_size / 2);
+	Meteor_funcDotProduct(a, b, ab, setup_size/2, false, 0);
+	// end;
+
+	//end_m("setup for 4-input gates for N fan-in");
+	end_time("setup for 4-mult with N fan-in");
+	pause_communication();
+	end_communication("setup for 4-mult with N fan-in");
+  
+   start_communication();
+   start_time();
+	vector<MEVectorType> c_tau(rounds);
+	for(int i =0; i < rounds; i++){
+		c_tau[i] = MEVectorType(sizeLong >> (2*(i+1)), make_pair(0, make_pair(0,0)));
+	}
+	Thunder_funcNMultGateOnline(c, c_tau[0], sizeLong);
+	for(int i = 1; i < rounds; i++){
+		Thunder_funcNMultGateOnline(c_tau[i-1], c_tau[i], sizeLong >> (2*i));
+	}
+	end_time("online for 4-mult with N fan-in");
+	pause_communication();
+	end_communication("online for 4-mult with N fan-in");
+
+}
+
+
 
 
 void Meteor_funcMultiplyNeighbors(const MEVectorSmallType &c_1, MEVectorSmallType &c_2, size_t size)
 {
 	log_print("only support 64 bit!");
 	assert((size % 4) == 0 && "size is not in {64, 16, 4}, error!");
+	size_t rss_size = size / 2, res_size = size / 4;
+	RSSVectorSmallType rss_tmp(rss_size, make_pair(0,0));
+	vector<smallType> ass_tmp(res_size, 0), Delta(res_size, 0);
+
+	for(size_t i = 0; i < rss_size; i++){
+	   // masked-replicated secret sharing -> mult-> replicated secret sharing;
+		rss_tmp[i].first = additionModPrime[multiplicationModPrime[c_1[2*i].first][c_1[2*i+1].second.first]][multiplicationModPrime[c_1[2*i].second.first][c_1[2*i+1].first]]+0-0;
+		rss_tmp[i].second = additionModPrime[multiplicationModPrime[c_1[2*i].first][c_1[2*i+1].second.second]][multiplicationModPrime[c_1[2*i].second.second][c_1[2*i+1].first]]+0-0;
+
+		if(partyNum == PARTY_A){
+			rss_tmp[i].first = additionModPrime[rss_tmp[i].first][multiplicationModPrime[c_1[2*i].first][c_1[2*i+1].first]];
+		}
+		if(partyNum == PARTY_C){
+			rss_tmp[i].second =  additionModPrime[rss_tmp[i].second][multiplicationModPrime[c_1[2*i].first][c_1[2*i+1].first]];
+		}
+	}
+
+	for(size_t i = 0; i < res_size; i++){
+		// replicated secret sharing -> mult -> additive secret sharing;
+		ass_tmp[i] = additionModPrime[additionModPrime[multiplicationModPrime[rss_tmp[2*i].first][rss_tmp[2*i+1].first]][multiplicationModPrime[rss_tmp[2*i].first][rss_tmp[2*i+1].second]]][multiplicationModPrime[rss_tmp[2*i].second][rss_tmp[2*i+1].first]];
+	}
+	funcReconstruct3out3parallel(ass_tmp, Delta, res_size, "reveal 3-3 sharing", false);
+
+	for(size_t i =0; i < res_size; i++)
+	{
+		c_2[i] = make_pair(Delta[i], make_pair(0,0));
+		
+	}
+
+
+	/*
 	size_t res_size = size / 4;
 	RSSVectorSmallType temp(res_size, make_pair(0,0));
 	for (int i = 0; i < res_size; i++)
@@ -355,6 +578,7 @@ void Meteor_funcMultiplyNeighbors(const MEVectorSmallType &c_1, MEVectorSmallTyp
 		c_2[i] = make_pair(Delta[i], make_pair(0,0));
 		
 	}
+	*/
 
 }
 
@@ -362,6 +586,23 @@ void Meteor_funcCrunchMultiply(const MEVectorSmallType &c, vector<smallType> &be
 {
 	size_t sizeLong = size * BIT_SIZE;
 	size_t rounds = size_t(log2(BIT_SIZE)/2);
+
+	//start_m();
+	start_communication();
+	start_time();
+	// Setup for our improved 4-input mult gates over meteor, start
+	size_t setup_size = BIT_SIZE + BIT_SIZE / 4 + BIT_SIZE / 16;
+	MEVectorSmallType a(setup_size / 2,  make_pair(1, make_pair(0,0))),  b(setup_size / 2,  make_pair(2, make_pair(0,0))), ab(setup_size / 2);
+	Meteor_funcDotProduct(a, b, ab, setup_size/2);
+	// end;
+
+	//end_m("setup for 4-input gates for 64 fan-in");
+	end_time("setup for 4-mult with 64 fan-in");
+	pause_communication();
+	end_communication("setup for 4-mult with 64 fan-in");
+  
+   start_communication();
+   start_time();
 	vector<MEVectorSmallType> c_tau(rounds);
 	for(int i =0; i < rounds; i++){
 		c_tau[i] = MEVectorSmallType(sizeLong >> (2*(i+1)), make_pair(0, make_pair(0,0)));
@@ -370,6 +611,9 @@ void Meteor_funcCrunchMultiply(const MEVectorSmallType &c, vector<smallType> &be
 	for(int i = 1; i < rounds; i++){
 		Meteor_funcMultiplyNeighbors(c_tau[i-1], c_tau[i], sizeLong >> (2*i));
 	}
+	end_time("online for 4-mult with 64 fan-in");
+	pause_communication();
+	end_communication("online for 4-mult with 64 fan-in");
 	
 	MEVectorSmallType m(size, make_pair(1, make_pair(0,0))), prod(size);
 	vector<smallType> reconst(size, 0);
@@ -628,6 +872,17 @@ void testMeteorfuncCrunchMultiply(size_t size, size_t iter)
 		Meteor_funcCrunchMultiply(a, betaPrime, size);
 	}
 }
+
+void testThunderNMult(size_t size, size_t N,  size_t iter)
+{
+	cout << "fuck off N Mult" << endl;
+	MEVectorType a(size*N, make_pair(1, make_pair(0,0)));
+	for(int runs = 0; runs < iter; runs++){
+		Thunder_funcNMultGate(a, size, N);
+	}
+}
+
+
 
 void testMeteorNeighborMultly(size_t size, size_t iter)
 {
