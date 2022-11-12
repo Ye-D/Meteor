@@ -1,0 +1,63 @@
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Error: Nested communication measurements
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Error: Nested communication measurements
+Loading data done.....
+connected success
+WE ARE USING METEOR RELU NOW!
+Meteor relu 0 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 1 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 2 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 3 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 4 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 5 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 6 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 7 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 8 end
+WE ARE USING METEOR RELU NOW!
+Meteor relu 9 end
+----------------------------------------------
+Wall Clock time for Test Meteor RELU: 0.0822094 sec
+CPU time for Test Meteor RELU: 0.038294 sec
+----------------------------------------------
+----------------------------------------------
+Total communication: 3.56478MB (sent) and 3.56478MB (recv)
+Total calls: 330 (sends) and 330 (recvs)
+----------------------------------------------
+----------------------------------------------
+Communication, Test Meteor RELU, P0: 1.18826MB (sent) 1.18826MB (recv)
+Rounds, Test Meteor RELU, P0: 110(sends) 110(recvs)
+----------------------------------------------
+----------------------------------------------
+Run details: 3PC (P0), 1 iterations, batch size 1
+Running Semi-honest Test Meteor RELU on MNIST dataset
+----------------------------------------------
+
+----------------------------------------------
+(1) FC Layer		  784 x 128
+			  1		 (Batch Size)
+----------------------------------------------
+(2) ReLU Layer		  128 x 1
+----------------------------------------------
+(3) FC Layer		  128 x 128
+			  1		 (Batch Size)
+----------------------------------------------
+(4) ReLU Layer		  128 x 1
+----------------------------------------------
+(5) FC Layer		  128 x 10
+			  1		 (Batch Size)
+----------------------------------------------
+(6) ReLU Layer		  10 x 1
+----------------------------------------------

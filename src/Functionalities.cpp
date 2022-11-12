@@ -477,8 +477,8 @@ void Thunder_funcNMultGate(const MEVectorType &c, size_t size, size_t N)
 	size_t rounds = size_t(log2(N)/2);
 
 	//start_m();
-	start_communication();
-	start_time();
+	//start_communication();
+	//start_time();
 	// Setup for our improved 4-input mult gates over meteor, start
 	size_t setup_size = N + N / 4 + N / 16;
 	MEVectorType a(setup_size / 2,  make_pair(1, make_pair(0,0))),  b(setup_size / 2,  make_pair(2, make_pair(0,0))), ab(setup_size / 2);
@@ -486,12 +486,12 @@ void Thunder_funcNMultGate(const MEVectorType &c, size_t size, size_t N)
 	// end;
 
 	//end_m("setup for 4-input gates for N fan-in");
-	end_time("setup for 4-mult with N fan-in");
-	pause_communication();
-	end_communication("setup for 4-mult with N fan-in");
+	//end_time("setup for 4-mult with N fan-in");
+	//pause_communication();
+	//end_communication("setup for 4-mult with N fan-in");
   
-   start_communication();
-   start_time();
+   //start_communication();
+   //start_time();
 	vector<MEVectorType> c_tau(rounds);
 	for(int i =0; i < rounds; i++){
 		c_tau[i] = MEVectorType(sizeLong >> (2*(i+1)), make_pair(0, make_pair(0,0)));
@@ -500,9 +500,9 @@ void Thunder_funcNMultGate(const MEVectorType &c, size_t size, size_t N)
 	for(int i = 1; i < rounds; i++){
 		Thunder_funcNMultGateOnline(c_tau[i-1], c_tau[i], sizeLong >> (2*i));
 	}
-	end_time("online for 4-mult with N fan-in");
-	pause_communication();
-	end_communication("online for 4-mult with N fan-in");
+	//end_time("online for 4-mult with N fan-in");
+	//pause_communication();
+	//end_communication("online for 4-mult with N fan-in");
 
 }
 
@@ -588,8 +588,8 @@ void Meteor_funcCrunchMultiply(const MEVectorSmallType &c, vector<smallType> &be
 	size_t rounds = size_t(log2(BIT_SIZE)/2);
 
 	//start_m();
-	start_communication();
-	start_time();
+	//start_communication();
+	//start_time();
 	// Setup for our improved 4-input mult gates over meteor, start
 	size_t setup_size = BIT_SIZE + BIT_SIZE / 4 + BIT_SIZE / 16;
 	MEVectorSmallType a(setup_size / 2,  make_pair(1, make_pair(0,0))),  b(setup_size / 2,  make_pair(2, make_pair(0,0))), ab(setup_size / 2);
@@ -597,12 +597,12 @@ void Meteor_funcCrunchMultiply(const MEVectorSmallType &c, vector<smallType> &be
 	// end;
 
 	//end_m("setup for 4-input gates for 64 fan-in");
-	end_time("setup for 4-mult with 64 fan-in");
-	pause_communication();
-	end_communication("setup for 4-mult with 64 fan-in");
+	//end_time("setup for 4-mult with 64 fan-in");
+	//pause_communication();
+	//end_communication("setup for 4-mult with 64 fan-in");
   
-   start_communication();
-   start_time();
+   //start_communication();
+   //start_time();
 	vector<MEVectorSmallType> c_tau(rounds);
 	for(int i =0; i < rounds; i++){
 		c_tau[i] = MEVectorSmallType(sizeLong >> (2*(i+1)), make_pair(0, make_pair(0,0)));
@@ -611,9 +611,9 @@ void Meteor_funcCrunchMultiply(const MEVectorSmallType &c, vector<smallType> &be
 	for(int i = 1; i < rounds; i++){
 		Meteor_funcMultiplyNeighbors(c_tau[i-1], c_tau[i], sizeLong >> (2*i));
 	}
-	end_time("online for 4-mult with 64 fan-in");
-	pause_communication();
-	end_communication("online for 4-mult with 64 fan-in");
+	//end_time("online for 4-mult with 64 fan-in");
+	//pause_communication();
+	//end_communication("online for 4-mult with 64 fan-in");
 	
 	MEVectorSmallType m(size, make_pair(1, make_pair(0,0))), prod(size);
 	vector<smallType> reconst(size, 0);
