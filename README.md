@@ -1,6 +1,6 @@
 # Meteor: Improved Secure 3-Party Neural Network Inference with Reducing Online Communication Costs
 
-A privacy-preserving framework for efficient 3-party protocols tailored for neural networks. This work builds on [Falcon](https://snwagh.github.io).
+A privacy-preserving framework for efficient 3-party protocols tailored for neural networks, the paper is avaiable [eprint/2023/100](https://eprint.iacr.org/2023/100). This work builds on [Falcon](https://snwagh.github.io).
 
 
 ### Table of Contents
@@ -11,24 +11,18 @@ A privacy-preserving framework for efficient 3-party protocols tailored for neur
     - [Repository Structure](#repository-structure)
     - [Building the code](#building)
     - [Running the code](#running)
-- [Additional Resources](#additional-resources)
-    - [Run combinations](#run-combinations)
-    - [Comparison with SecureNN](#comparison-with-securenn)
-    - [Errors and Issues](#errors-and-issues)
-    - [Todos](#todos)
-    - [Citation](#citation)
 
 
 ### Warning
 ---
-This codebase is released solely as a reference for other developers, as a proof-of-concept, and for benchmarking purposes. In particular, it has not had any security review, has a number of implementational TODOs, has a number of known bugs (especially in the malicious implementation), and thus, should be used at your own risk. You can contribute to this project by creating pull requests and submitting fixes and implementations. The code has not run end-to-end training and we expect this to require some parameter tuning, hence training and inference won't work out of the box (however, inference from pre-trained networks can be repreduced easily).
+This codebase is released solely as a reference for other developers, as a proof-of-concept, and for benchmarking purposes. In particular, it has not had any security review, has a number of implementational TODOs, has a number of known bugs (especially in the malicious implementation), and thus, should be used at your own risk. You can contribute to this project by creating pull requests and submitting fixes and implementations. The code has not run end-to-end inference and we provide online computation at present, the setup phase will be added in future.
 
 
 ### Requirements
 ---
-* The code should work on most Linux distributions (It has been developed and tested with [Ubuntu](http://www.ubuntu.com/) 16.04 and 18.04).
+* The code should work on most Linux distributions (It has been developed and tested with [Ubuntu](http://www.ubuntu.com/) 18.04).
 
-* **Required packages for Falcon:**
+* **Required packages for Meteor:**
   * [`g++`](https://packages.debian.org/testing/g++)
   * [`make`](https://packages.debian.org/testing/make)
   * [`libssl-dev`](https://packages.debian.org/testing/libssl-dev)
